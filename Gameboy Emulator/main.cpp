@@ -1,9 +1,17 @@
 #include <iostream>
 #include "gameboy.h"
+#include "mmu.h"
 
 int main(int argc, char** argv)
 {
-    gameboy* _gb = new gameboy();
-    _gb->loadGame(argv[1]);
+    mmu memory;
+    gameboy _gb(memory);
 
+    _gb.initialize();
+    _gb.loadGame(argv[1]);
+
+    bool quit = false;
+
+    while(!quit)
+        _gb.ExecuteNextOpcode();
 }
